@@ -21,8 +21,8 @@ def start_game():
     print('Player 2, what is your name?')
     p2 = Player(str(input()))
 
-    print('\n')
-    print(cp.format_p1_name(p1.name), cp.format_standard_text(' VS '), cp.format_p2_name(p2.name))
+    print('')
+    print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("VS")} {cp.format_p2_name(p2.name)}')
     cp.print_game_text('              FIGHT!              ')
     game.print_instructions()
 
@@ -36,7 +36,7 @@ def start_game():
             p2_input = get_hidden_user_input(p2.name)
             game.set_p2_move(p2_input)
 
-        print('\n')
+        print('')
         print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("played")} {game.get_move_formatting(game.p1_move)}')
         print(f'{cp.format_p2_name(p2.name)} {cp.format_standard_text("played")} {game.get_move_formatting(game.p2_move)}')
         game.get_game_result()
@@ -71,21 +71,27 @@ q = Quit game\
 
     user_input = input().lower().strip()
     if user_input == 's':
-        score_text = f'| {p1.name}\'s Score: {str(p1.score)} || {p2.name}\'s Score: {str(p2.score)} |'
-        print('-' * len(score_text))
-        print(score_text)
-        print('-' * len(score_text))
+        print_scoreboard(p1, p2)
         game_next_steps(p1, p2, game)
     elif user_input == 'p':
         game.reset_result_state()
         return
     elif user_input == 'q':
+        print('')
+        cp.print_game_text('            GAME OVER!            ')
+        print_scoreboard(p1, p2)
         game.end_game()
         return
     else:
         cp.print_warning('Invalid option')
         game_next_steps(p1, p2, game)
 
+
+def print_scoreboard(p1, p2):
+    score_text = f'| {p1.name}\'s Score: {str(p1.score)} || {p2.name}\'s Score: {str(p2.score)} |'
+    print('-' * len(score_text))
+    print(score_text)
+    print('-' * len(score_text))
 
 if __name__ == '__main__':
     start_game()
