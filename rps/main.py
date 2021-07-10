@@ -1,5 +1,6 @@
 from Player import Player
 from Game import Game
+from Enums import ResultEnum
 
 
 def start_game():
@@ -27,10 +28,24 @@ def start_game():
             print(p2.name + ' make your move:')
             game.set_p2_move(input())
 
-        print(p1.name + ' played ' + game.p1_move + ' and ' + p2.name + ' played ' + game.p2_move)
+        print(p1.name + ' played ' + game.p1_move.name + ' and ' + p2.name + ' played ' + game.p2_move.name)
+        game.get_game_result()
+
+        if game.result == ResultEnum.DRAW:
+            print('It\'s a draw!')
+        elif game.result == ResultEnum.P1:
+            p1.add_to_score()
+            print(p1.name + ' wins!')
+        else:
+            p2.add_to_score()
+            print(p2.name + ' wins!')
+
+        print(p1.name + ' Score: ' + str(p1.score) + ' || ' + p2.name + ' Score: ' + str(p2.score))
 
         print('Continue playing (y/n)?')
-        if str(input()).lower().strip() == 'n':
+        if str(input()).lower().strip() == 'y':
+            game.reset_result_state()
+        else:
             game.end_game()
 
 

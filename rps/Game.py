@@ -1,11 +1,11 @@
-from Enums import MoveEnum
+from Enums import MoveEnum, ResultEnum
 
 
 class Game:
     is_game_running = True
     p1_move = ''
     p2_move = ''
-    winner = ''
+    result = ResultEnum.NONE
 
     def end_game(self):
         self.is_game_running = False
@@ -16,7 +16,7 @@ class Game:
             self.print_instructions()
             return
 
-        self.p1_move = MoveEnum(int(move)).name
+        self.p1_move = MoveEnum(int(move))
 
     def set_p2_move(self, move):
         if not(self.is_valid_input(move)):
@@ -24,10 +24,41 @@ class Game:
             self.print_instructions()
             return
 
-        self.p2_move = MoveEnum(int(move)).name
+        self.p2_move = MoveEnum(int(move))
 
-    def set_winner(self, winner):
-        self.winner = winner
+    def set_result(self, result: ResultEnum):
+        self.result = result
+
+    def get_game_result(self):
+        if self.p1_move == self.p2_move:
+            self.set_result(ResultEnum.DRAW)
+            return
+
+        if self.p1_move == MoveEnum.ROCK:
+            if self.p2_move == MoveEnum.SCISSORS:
+                self.set_result(ResultEnum.P1)
+            else:
+                self.set_result(ResultEnum.P2)
+            return
+
+        if self.p1_move == MoveEnum.PAPER:
+            if self.p2_move == MoveEnum.ROCK:
+                self.set_result(ResultEnum.P1)
+            else:
+                self.set_result(ResultEnum.P2)
+            return
+
+        if self.p1_move == MoveEnum.SCISSORS:
+            if self.p2_move == MoveEnum.PAPER:
+                self.set_result(ResultEnum.P1)
+            else:
+                self.set_result(ResultEnum.P2)
+            return
+
+    def reset_result_state(self):
+        self.p1_move = ''
+        self.p2_move = ''
+        self.result = ResultEnum.NONE
 
     @staticmethod
     def is_valid_input(user_input):
@@ -36,7 +67,7 @@ class Game:
 
     @staticmethod
     def is_valid_move(user_move):
-        valid_moves = set(move.name for move in MoveEnum)
+        valid_moves = set(move for move in MoveEnum)
         return user_move in valid_moves
 
     @staticmethod
