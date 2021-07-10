@@ -1,3 +1,6 @@
+import getpass
+import sys
+
 from Player import Player
 from Game import Game
 from Enums import ResultEnum
@@ -21,12 +24,12 @@ def start_game():
     while game.is_game_running:
 
         while not (game.is_valid_move(game.p1_move)):
-            print(p1.name + ' make your move:')
-            game.set_p1_move(input())
+            p1_input = get_hidden_user_input(p1.name)
+            game.set_p1_move(p1_input)
 
         while not (game.is_valid_move(game.p2_move)):
-            print(p2.name + ' make your move:')
-            game.set_p2_move(input())
+            p2_input = get_hidden_user_input(p2.name)
+            game.set_p2_move(p2_input)
 
         print(p1.name + ' played ' + game.p1_move.name + ' and ' + p2.name + ' played ' + game.p2_move.name)
         game.get_game_result()
@@ -41,6 +44,14 @@ def start_game():
             print(p2.name + ' wins!')
 
         game_next_steps(p1, p2, game)
+
+
+def get_hidden_user_input(player_name):
+    if sys.stdin.isatty():
+        return getpass.getpass(prompt=f'{player_name} make your move:')
+    else:
+        print(f'{player_name} make your move:')
+        return sys.stdin.readline().rstrip()
 
 
 def game_next_steps(p1, p2, game):
