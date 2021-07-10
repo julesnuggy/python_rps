@@ -1,4 +1,5 @@
 from rps.Enums import MoveEnum, ResultEnum
+from tools.ColourfulPrint import ColourfulPrint
 
 
 class Game:
@@ -6,6 +7,7 @@ class Game:
     p1_move = ''
     p2_move = ''
     result = ResultEnum.NONE
+    cp = ColourfulPrint()
 
     def end_game(self):
         self.is_game_running = False
@@ -28,6 +30,14 @@ class Game:
 
     def set_result(self, result: ResultEnum):
         self.result = result
+
+    def get_move_formatting(self, move):
+        if move == MoveEnum.ROCK:
+            return self.cp.format_back_yellow(MoveEnum.ROCK.name)
+        elif move == MoveEnum.PAPER:
+            return self.cp.format_back_white(MoveEnum.PAPER.name)
+        elif move == MoveEnum.SCISSORS:
+            return self.cp.format_back_magenta(MoveEnum.SCISSORS.name)
 
     def get_game_result(self):
         if self.p1_move == self.p2_move:

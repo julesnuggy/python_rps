@@ -4,12 +4,14 @@ import sys
 from Player import Player
 from Game import Game
 from Enums import ResultEnum
+from tools.ColourfulPrint import ColourfulPrint
 
 
 def start_game():
     game = Game()
+    cp = ColourfulPrint()
 
-    print('Welcome to Rock Paper Scissors!')
+    cp.print_back_green('      ROCK! PAPER! SCISSORS!      ')
 
     print('Player 1, what is your name?')
     p1 = Player(str(input()))
@@ -17,8 +19,9 @@ def start_game():
     print('Player 2, what is your name?')
     p2 = Player(str(input()))
 
-    print(p1.name + ' VS ' + p2.name)
-    print('FIGHT!')
+    print('\n')
+    print(cp.format_fore_blue(p1.name), cp.format_fore_white(' VS '), cp.format_fore_red(p2.name))
+    cp.print_back_green('              FIGHT!              ')
     game.print_instructions()
 
     while game.is_game_running:
@@ -31,17 +34,19 @@ def start_game():
             p2_input = get_hidden_user_input(p2.name)
             game.set_p2_move(p2_input)
 
-        print(f'{p1.name} played {game.p1_move.name} and {p2.name} played {game.p2_move.name}')
+        print('\n')
+        print(f'{cp.format_fore_blue(p1.name)} {cp.format_fore_white("played")} {game.get_move_formatting(game.p1_move)}')
+        print(f'{cp.format_fore_red(p2.name)} {cp.format_fore_white("played")} {game.get_move_formatting(game.p2_move)}')
         game.get_game_result()
 
         if game.result == ResultEnum.DRAW:
-            print('It\'s a draw!')
+            print(cp.format_back_white('It\'s a draw!'))
         elif game.result == ResultEnum.P1:
             p1.add_to_score()
-            print(f'{p1.name} wins!')
+            cp.print_back_blue(f'{p1.name} wins!')
         else:
             p2.add_to_score()
-            print(f'{p2.name} wins!')
+            cp.print_back_red(f'{p2.name} wins!')
 
         game_next_steps(p1, p2, game)
 
