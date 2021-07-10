@@ -7,11 +7,13 @@ from Enums import ResultEnum
 from tools.ColourfulPrint import ColourfulPrint
 
 
+cp = ColourfulPrint()
+
+
 def start_game():
     game = Game()
-    cp = ColourfulPrint()
 
-    cp.print_back_green('      ROCK! PAPER! SCISSORS!      ')
+    cp.print_game_text('      ROCK! PAPER! SCISSORS!      ')
 
     print('Player 1, what is your name?')
     p1 = Player(str(input()))
@@ -20,8 +22,8 @@ def start_game():
     p2 = Player(str(input()))
 
     print('\n')
-    print(cp.format_fore_blue(p1.name), cp.format_fore_white(' VS '), cp.format_fore_red(p2.name))
-    cp.print_back_green('              FIGHT!              ')
+    print(cp.format_p1_name(p1.name), cp.format_standard_text(' VS '), cp.format_p2_name(p2.name))
+    cp.print_game_text('              FIGHT!              ')
     game.print_instructions()
 
     while game.is_game_running:
@@ -35,18 +37,18 @@ def start_game():
             game.set_p2_move(p2_input)
 
         print('\n')
-        print(f'{cp.format_fore_blue(p1.name)} {cp.format_fore_white("played")} {game.get_move_formatting(game.p1_move)}')
-        print(f'{cp.format_fore_red(p2.name)} {cp.format_fore_white("played")} {game.get_move_formatting(game.p2_move)}')
+        print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("played")} {game.get_move_formatting(game.p1_move)}')
+        print(f'{cp.format_p2_name(p2.name)} {cp.format_standard_text("played")} {game.get_move_formatting(game.p2_move)}')
         game.get_game_result()
 
         if game.result == ResultEnum.DRAW:
-            print(cp.format_back_white('It\'s a draw!'))
+            cp.print_draw('It\'s a draw!')
         elif game.result == ResultEnum.P1:
             p1.add_to_score()
-            cp.print_back_blue(f'{p1.name} wins!')
+            cp.print_p1_wins(f'{p1.name} wins!')
         else:
             p2.add_to_score()
-            cp.print_back_red(f'{p2.name} wins!')
+            cp.print_p2_wins(f'{p2.name} wins!')
 
         game_next_steps(p1, p2, game)
 
@@ -81,7 +83,7 @@ q = Quit game\
         game.end_game()
         return
     else:
-        print('Invalid option')
+        cp.print_warning('Invalid option')
         game_next_steps(p1, p2, game)
 
 

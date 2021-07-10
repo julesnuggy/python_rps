@@ -7,37 +7,45 @@ class ColourfulPrint:
         init(autoreset=True)
 
     @staticmethod
-    def format_fore_blue(text):
+    def format_p1_name(text):
         return Fore.CYAN + Style.BRIGHT + text
 
     @staticmethod
-    def format_fore_red(text):
+    def format_p2_name(text):
         return Fore.RED + Style.BRIGHT + text
 
     @staticmethod
-    def format_fore_white(text):
+    def format_standard_text(text):
         return Fore.WHITE + Style.BRIGHT + text
 
     @staticmethod
-    def format_back_yellow(text):
-        return Back.YELLOW + Style.BRIGHT + text
+    def format_move_rock(text):
+        return Back.GREEN + Fore.YELLOW + text
 
     @staticmethod
-    def format_back_white(text):
+    def format_move_paper(text):
         return Back.WHITE + Fore.BLACK + Style.DIM + text
 
     @staticmethod
-    def format_back_magenta(text):
+    def format_move_scissors(text):
         return Back.MAGENTA + Style.BRIGHT + text
 
     @staticmethod
-    def print_back_blue(text):
+    def print_draw(text):
+        print(Back.YELLOW + Fore.BLACK + text)
+
+    @staticmethod
+    def print_p1_wins(text):
         print(Back.BLUE + Style.BRIGHT + text)
 
     @staticmethod
-    def print_back_red(text):
+    def print_p2_wins(text):
         print(Back.RED + Style.BRIGHT + text)
 
     @staticmethod
-    def print_back_green(text):
+    def print_game_text(text):
         print(Back.GREEN + Fore.WHITE + Style.BRIGHT + text)
+
+    @staticmethod
+    def print_warning(text):
+        print(Back.WHITE + Fore.RED + text)

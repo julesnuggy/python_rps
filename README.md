@@ -35,3 +35,14 @@ At the end of each match, you will have 3 options available to you:
 |   s   | View the scoreboard   |
 |   p   | Play another match    |
 |   q   | Quit the game         |
+
+## FAQ
+* Why is the output displaying weirdly in my Git Bash, with lots of random strings at the beginning?
+  * You are likely using a Windows system and your Git Bash to use the MinTTY terminal, which is not ANSI compatible.
+    To work around this, you can either:
+      * Uninstall then reinstall Git Bash, ensuring you select **Use Windows default console window**
+        when configuring the terminal emulator.
+      * Run the app in an IDE such as PyCharm, making sure it is configured to emulate terminal in the output console 
+        (see **Setup**)
+      * Use another terminal which is ANSI compatible, such as `cmd` or `Powershell`.
+      * Switch to use a Linux or MacOS (super simple, right?) 

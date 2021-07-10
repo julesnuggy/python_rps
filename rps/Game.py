@@ -14,7 +14,7 @@ class Game:
 
     def set_p1_move(self, move):
         if not(self.is_valid_input(move)):
-            print('Not a valid move!')
+            self.cp.print_warning('Not a valid move!')
             self.print_instructions()
             return
 
@@ -22,7 +22,7 @@ class Game:
 
     def set_p2_move(self, move):
         if not(self.is_valid_input(move)):
-            print('Not a valid move!')
+            self.cp.print_warning('Not a valid move!')
             self.print_instructions()
             return
 
@@ -33,11 +33,11 @@ class Game:
 
     def get_move_formatting(self, move):
         if move == MoveEnum.ROCK:
-            return self.cp.format_back_yellow(MoveEnum.ROCK.name)
+            return self.cp.format_move_rock(MoveEnum.ROCK.name)
         elif move == MoveEnum.PAPER:
-            return self.cp.format_back_white(MoveEnum.PAPER.name)
+            return self.cp.format_move_paper(MoveEnum.PAPER.name)
         elif move == MoveEnum.SCISSORS:
-            return self.cp.format_back_magenta(MoveEnum.SCISSORS.name)
+            return self.cp.format_move_scissors(MoveEnum.SCISSORS.name)
 
     def get_game_result(self):
         if self.p1_move == self.p2_move:
