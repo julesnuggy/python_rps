@@ -31,17 +31,17 @@ def start_game():
             p2_input = get_hidden_user_input(p2.name)
             game.set_p2_move(p2_input)
 
-        print(p1.name + ' played ' + game.p1_move.name + ' and ' + p2.name + ' played ' + game.p2_move.name)
+        print(f'{p1.name} played {game.p1_move.name} and {p2.name} played {game.p2_move.name}')
         game.get_game_result()
 
         if game.result == ResultEnum.DRAW:
             print('It\'s a draw!')
         elif game.result == ResultEnum.P1:
             p1.add_to_score()
-            print(p1.name + ' wins!')
+            print(f'{p1.name} wins!')
         else:
             p2.add_to_score()
-            print(p2.name + ' wins!')
+            print(f'{p2.name} wins!')
 
         game_next_steps(p1, p2, game)
 
@@ -64,7 +64,7 @@ q = Quit game\
 
     user_input = input().lower().strip()
     if user_input == 's':
-        score_text = '| ' + p1.name + ' Score: ' + str(p1.score) + ' || ' + p2.name + ' Score: ' + str(p2.score) + ' |'
+        score_text = f'| {p1.name}\'s Score: {str(p1.score)} || {p2.name}\'s Score: {str(p2.score)} |'
         print('-' * len(score_text))
         print(score_text)
         print('-' * len(score_text))
