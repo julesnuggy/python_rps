@@ -1,4 +1,4 @@
-from Enums import MoveEnum, ResultEnum
+from rps.Enums import MoveEnum, ResultEnum
 
 
 class Game:
