@@ -4,6 +4,8 @@ from rps.Player import Player
 
 
 def start_game() -> string:
+    game_is_running = True
+
     print('Welcome to Rock Paper Scissors!')
 
     print('Player 1, what is your name?')
@@ -15,12 +17,19 @@ def start_game() -> string:
     p2 = Player(p2_name)
 
     print(p1.name + ' is playing against ' + p2.name)
-    print(p1.name + '\'s score is ' + p1.score.__str__())
-    print(p2.name + '\'s score is ' + p2.score.__str__())
-    p1.add_to_score()
-    p1.add_to_score()
-    print(p1.name + '\'s score is ' + p1.score.__str__())
-    print(p2.name + '\'s score is ' + p2.score.__str__())
+
+    while game_is_running:
+        print(p1.name + '\'s score is ' + p1.score.__str__())
+        print(p2.name + '\'s score is ' + p2.score.__str__())
+        p1.add_to_score()
+        p1.add_to_score()
+        print(p1.name + '\'s score is ' + p1.score.__str__())
+        print(p2.name + '\'s score is ' + p2.score.__str__())
+
+        print('Continue playing (y/n)?')
+        should_continue = str(input())
+        if should_continue == 'n':
+            game_is_running = False
 
 
 if __name__ == '__main__':
