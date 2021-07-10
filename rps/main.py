@@ -16,20 +16,46 @@ def start_game():
     p2 = Player(p2_name)
 
     print(p1.name + ' VS ' + p2.name)
+    print('FIGHT!')
+    print_instructions()
 
     while game.is_game_running:
         print(p1.name + ' make your move:')
-        game.p1_move = input()
+        p1_input = input()
+
+        while not(game.is_valid_move(p1_input)):
+            print('Not a valid move!')
+            print_instructions()
+            print(p1.name + ' make your move:')
+            p1_input = input()
+
+        game.set_p1_move(int(p1_input))
 
         print(p2.name + ' make your move:')
-        game.p2_move = input()
+        p2_input = input()
+
+        while not(game.is_valid_move(p2_input)):
+            print('Not a valid move!')
+            print_instructions()
+            print(p2.name + ' make your move:')
+            p2_input = input()
+
+        game.set_p2_move(int(p2_input))
 
         print(p1.name + ' played ' + game.p1_move + ' and ' + p2.name + ' played ' + game.p2_move)
 
         print('Continue playing (y/n)?')
-        should_continue = str(input()).lower()
+        should_continue = str(input()).lower().strip()
         if should_continue == 'n':
             game.end_game()
+
+
+def print_instructions():
+    print("""\
+-----------------------------------------
+| ROCK = 1 || PAPER = 2 || SCISSORS = 3 |
+-----------------------------------------
+    """)
 
 
 if __name__ == '__main__':
