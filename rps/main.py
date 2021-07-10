@@ -40,13 +40,33 @@ def start_game():
             p2.add_to_score()
             print(p2.name + ' wins!')
 
-        print(p1.name + ' Score: ' + str(p1.score) + ' || ' + p2.name + ' Score: ' + str(p2.score))
+        game_next_steps(p1, p2, game)
 
-        print('Continue playing (y/n)?')
-        if str(input()).lower().strip() == 'y':
-            game.reset_result_state()
-        else:
-            game.end_game()
+
+def game_next_steps(p1, p2, game):
+    print("""
+What do you want to do next?
+s = Scoreboard
+p = Play another match
+q = Quit game\
+    """)
+
+    user_input = input().lower().strip()
+    if user_input == 's':
+        score_text = '| ' + p1.name + ' Score: ' + str(p1.score) + ' || ' + p2.name + ' Score: ' + str(p2.score) + ' |'
+        print('-' * len(score_text))
+        print(score_text)
+        print('-' * len(score_text))
+        game_next_steps(p1, p2, game)
+    elif user_input == 'p':
+        game.reset_result_state()
+        return
+    elif user_input == 'q':
+        game.end_game()
+        return
+    else:
+        print('Invalid option')
+        game_next_steps(p1, p2, game)
 
 
 if __name__ == '__main__':
