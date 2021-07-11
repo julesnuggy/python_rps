@@ -1,5 +1,5 @@
 from rps.Enums import MoveEnum, ResultEnum
-from tools.ColourfulPrint import ColourfulPrint
+from utils.ColourfulPrint import ColourfulPrint
 
 
 class Game:

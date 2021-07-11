@@ -1,10 +1,8 @@
-import getpass
-import sys
-
 from Player import Player
 from Game import Game
 from Enums import ResultEnum
-from tools.ColourfulPrint import ColourfulPrint
+from utils.ColourfulPrint import ColourfulPrint
+from utils.ConsoleInputHelper import get_hidden_user_input, print_scoreboard
 
 
 cp = ColourfulPrint()
@@ -53,14 +51,6 @@ def start_game():
         game_next_steps(p1, p2, game)
 
 
-def get_hidden_user_input(player_name):
-    if sys.stdin.isatty():
-        return getpass.getpass(prompt=f'{player_name} make your move:')
-    else:
-        print(f'{player_name} make your move:')
-        return sys.stdin.readline().rstrip()
-
-
 def game_next_steps(p1, p2, game):
     print("""
 What do you want to do next?
@@ -86,12 +76,6 @@ q = Quit game\
         cp.print_warning('Invalid option')
         game_next_steps(p1, p2, game)
 
-
-def print_scoreboard(p1, p2):
-    score_text = f'| {p1.name}\'s Score: {str(p1.score)} || {p2.name}\'s Score: {str(p2.score)} |'
-    print('-' * len(score_text))
-    print(score_text)
-    print('-' * len(score_text))
 
 if __name__ == '__main__':
     start_game()
