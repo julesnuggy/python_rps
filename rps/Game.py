@@ -76,7 +76,9 @@ class Game:
     def handle_game_end(self, p1, p2):
         print_game_end_results(p1, p2)
         self.end_game()
-        exit()
+
+        if self.p1_move == '' or self.p2_move == '':
+            exit()
 
     @staticmethod
     def is_valid_input(user_input):

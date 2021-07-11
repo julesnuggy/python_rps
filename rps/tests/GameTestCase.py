@@ -1,8 +1,9 @@
 import unittest
 
+from Player import Player
 from rps.Enums import ResultEnum, MoveEnum
 from rps.Game import Game
-from tests.helpers.ContextManager import captured_output
+from rps.tests.helpers.ContextManager import captured_output
 
 
 class GameTestCase(unittest.TestCase):
@@ -20,6 +21,13 @@ class GameTestCase(unittest.TestCase):
         self.game.end_game()
         # Then
         self.assertEqual(self.game.is_game_running, False)
+
+    def test_can_increment_round(self):
+        # When
+        self.game.increment_round()
+        self.game.increment_round()
+        # Then
+        self.assertEqual(self.game.round, 3)
 
     def test_can_set_player_moves_to_rock(self):
         # When
@@ -60,7 +68,7 @@ class GameTestCase(unittest.TestCase):
         # Then
         self.assertEqual(self.game.result, ResultEnum.P1)
 
-    def test_get_game_result_correctly_calculates_result(self):
+    def test_get_game_result_correctly_calculates_round_result(self):
         # Given
         self.game.set_p1_move('1')
         self.game.set_p2_move('2')
@@ -74,6 +82,24 @@ class GameTestCase(unittest.TestCase):
         self.game.reset_result_state()
         # Then
         self.test_game_default_attributes()
+
+    def test_can_handle_game_end_correctly(self):
+        # Given
+        with captured_output() as (out, err):
+            output = out.getvalue().strip()
+        p1 = Player('p1', True, False)
+        p2 = Player('p2', False, False)
+        self.game.p1_move = '1'
+        self.game.p2_move = '2'
+        p1.score = 5
+        p2.score = 2
+        # When
+        self.game.handle_game_end(p1, p2)
+        # Then
+        self.assertFalse(self.game.is_game_running)
+        self.assertIn(output, 'p1\'s Score: 5')
+        self.assertIn(output, 'p2\'s Score: 2')
+        self.assertIn(output, 'p1 wins!')
 
     def test_correctly_checks_is_valid_input(self):
         self.assertTrue(self.game.is_valid_input('1'))
