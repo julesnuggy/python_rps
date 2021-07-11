@@ -6,19 +6,23 @@ This app was built using **Pipenv**, so the only pre-requisite is that you have 
 virtual environment where it will install all the required packages (including the necessary version of Python) to run 
 this app.
 * **pip** installation: `pip install --user pipenv`
-* **Homebrew** installation: `brew install pipenv`
+* **Homebrew / Linuxbrew** installation: `brew install pipenv`
 
 Full Pipenv installation instructions can be found [here](https://docs.pipenv.org/install/#installing-pipenv).
 
 ## Setup
 1) Clone this project.
-2) In your terminal, `cd` to the project root directory (`/python_rps`) and run `pipenv install`.
+2) In your terminal, `cd` to the project root directory (`/python_rps`)
 3) You can then run the app in the terminal, or an IDE of your choice that is compatible with Python (e.g. PyCharm, 
    Spyder, IDLE, etc):
     ### Terminal
-    * Run `<your python executable> .rps/main.py` from the project root directory in the terminal of your choice
-        * e.g. `python.exe ./rps/main.py`
-        * e.g. `python3 ./rps/main.py`
+    * From the project root directory in your terminal,run the following code: 
+       ```
+       pipenv install
+       pipenv shell
+       python ./rps/main.py
+       ```
+      This installs the required packages, creates a virtual environment in which the app can run, and then runs the app.
     ### IDE
     * Run the `main.py` file in your IDE of choice
         * For the game to run properly, please make sure you configure the project to **emulate terminal in output 
