@@ -1,15 +1,27 @@
 import getpass
 import sys
 
+from rps.Player import Player
+from utils.ColourfulPrint import ColourfulPrint
 
-def get_hidden_user_input(player_name: str):
-    if sys.stdin.isatty():
-        return getpass.getpass(prompt=f'{player_name} make your move:')
+
+cp = ColourfulPrint()
+
+
+def get_hidden_user_input(player: Player):
+    if player.is_p1:
+        formatted_player_name = cp.format_p1_name(player.name)
     else:
-        print(f'{player_name} make your move:')
+        formatted_player_name = cp.format_p2_name(player.name)
+
+    print(f'{formatted_player_name} make your move:')
+
+    if sys.stdin.isatty():
+        return getpass.getpass(prompt='')
+    else:
         return sys.stdin.readline().rstrip()
 
-def print_scoreboard(p1, p2):
+def print_scoreboard(p1: Player, p2: Player):
     score_text = f'| {p1.name}\'s Score: {str(p1.score)} || {p2.name}\'s Score: {str(p2.score)} |'
     print('-' * len(score_text))
     print(score_text)

@@ -27,14 +27,14 @@ def start_game():
             is_p2_cpu = None
 
     print('Player 1, what is your name?')
-    p1 = Player(str(input()), False)
+    p1 = Player(str(input()), True, False)
 
     if (is_p2_cpu):
         print('Player 2, JANKENPON, has entered the arena')
-        p2 = Player('JANKENPON', True)
+        p2 = Player('JANKENPON', False, True)
     else:
         print('Player 2, what is your name?')
-        p2 = Player(str(input()), False)
+        p2 = Player(str(input()), False, False)
 
     print('')
     print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("VS")} {cp.format_p2_name(p2.name)}')
@@ -44,7 +44,7 @@ def start_game():
     while game.is_game_running:
 
         while not (game.is_valid_move(game.p1_move)):
-            p1_input = get_hidden_user_input(p1.name)
+            p1_input = get_hidden_user_input(p1)
             game.set_p1_move(p1_input)
 
         if (p2.is_cpu_player):
@@ -52,7 +52,7 @@ def start_game():
             print(f'{p2.name} has made their move!')
         else:
             while not (game.is_valid_move(game.p2_move)):
-                p2_input = get_hidden_user_input(p2.name)
+                p2_input = get_hidden_user_input(p2)
                 game.set_p2_move(p2_input)
 
         print('')
