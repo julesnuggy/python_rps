@@ -14,7 +14,7 @@ def get_hidden_user_input(player: Player):
     else:
         formatted_player_name = cp.format_p2_name(player.name)
 
-    print(f'{formatted_player_name} make your move:')
+    print(f'{formatted_player_name} {cp.format_standard_text("make your move")}:')
 
     if sys.stdin.isatty():
         return getpass.getpass(prompt='')

@@ -45,7 +45,18 @@ def start_game():
 
         while not (game.is_valid_move(game.p1_move)):
             p1_input = get_hidden_user_input(p1)
-            game.set_p1_move(p1_input)
+
+            if p1_input.lower().strip() == 'i':
+                game.print_instructions()
+            elif p1_input.lower().strip() == 's':
+                print_scoreboard(p1, p2)
+            elif p1_input.lower().strip() == 'q':
+                print('')
+                cp.print_game_text('            GAME OVER!            ')
+                print_scoreboard(p1, p2)
+                game.end_game()
+            else:
+                game.set_p1_move(p1_input)
 
         if p2.is_cpu_player:
             game.set_p2_move(str(randint(1, 3)))
@@ -69,7 +80,7 @@ def start_game():
             p2.add_to_score()
             cp.print_p2_wins(f'{p2.name} wins!')
 
-        game_next_steps(p1, p2, game)
+        game.reset_result_state()
 
 
 def game_next_steps(p1, p2, game):

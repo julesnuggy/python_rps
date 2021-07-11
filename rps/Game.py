@@ -15,7 +15,6 @@ class Game:
     def set_p1_move(self, move):
         if not(self.is_valid_input(move)):
             self.cp.print_warning('Not a valid move!')
-            self.print_instructions()
             return
 
         self.p1_move = MoveEnum(int(move))
@@ -23,7 +22,6 @@ class Game:
     def set_p2_move(self, move):
         if not(self.is_valid_input(move)):
             self.cp.print_warning('Not a valid move!')
-            self.print_instructions()
             return
 
         self.p2_move = MoveEnum(int(move))
@@ -83,7 +81,11 @@ class Game:
     @staticmethod
     def print_instructions():
         print("""\
------------------------------------------
-| ROCK = 1 || PAPER = 2 || SCISSORS = 3 |
------------------------------------------
+------------------------------------
+|     OPTIONS      ||     MOVES    |
+------------------------------------
+| i = Instructions || 1 = ROCK     |
+| s = Scoreboard   || 2 = PAPER    |
+| q = Quit game    || 3 = SCISSORS |
+------------------------------------
         """)
