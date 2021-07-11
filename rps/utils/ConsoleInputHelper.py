@@ -2,7 +2,7 @@ import getpass
 import sys
 
 from rps.Player import Player
-from utils.ColourfulPrint import ColourfulPrint
+from rps.utils.ColourfulPrint import ColourfulPrint
 
 
 cp = ColourfulPrint()
@@ -20,6 +20,7 @@ def get_hidden_user_input(player: Player):
         return getpass.getpass(prompt='')
     else:
         return sys.stdin.readline().rstrip()
+
 
 def print_scoreboard(p1: Player, p2: Player):
     score_text = f'| {p1.name}\'s Score: {str(p1.score)} || {p2.name}\'s Score: {str(p2.score)} |'

@@ -2,7 +2,7 @@ from random import randint
 
 from Player import Player
 from Game import Game
-from Enums import MoveEnum, ResultEnum
+from Enums import ResultEnum
 from utils.ColourfulPrint import ColourfulPrint
 from utils.ConsoleInputHelper import get_hidden_user_input, print_scoreboard
 
@@ -19,9 +19,9 @@ def start_game():
     while not (is_p2_cpu in {True, False}):
         print('Are 1 or 2 humans playing?')
         user_input = input()
-        if (user_input == '1'):
+        if user_input == '1':
             is_p2_cpu = True
-        elif(user_input == '2'):
+        elif user_input == '2':
             is_p2_cpu = False
         else:
             is_p2_cpu = None
@@ -29,7 +29,7 @@ def start_game():
     print('Player 1, what is your name?')
     p1 = Player(str(input()), True, False)
 
-    if (is_p2_cpu):
+    if is_p2_cpu:
         print('Player 2, JANKENPON, has entered the arena')
         p2 = Player('JANKENPON', False, True)
     else:
@@ -47,7 +47,7 @@ def start_game():
             p1_input = get_hidden_user_input(p1)
             game.set_p1_move(p1_input)
 
-        if (p2.is_cpu_player):
+        if p2.is_cpu_player:
             game.set_p2_move(str(randint(1, 3)))
             print(f'{p2.name} has made their move!')
         else:

@@ -1,4 +1,4 @@
-from rps.Enums import MoveEnum, ResultEnum
+from Enums import MoveEnum, ResultEnum
 from utils.ColourfulPrint import ColourfulPrint
 
 
