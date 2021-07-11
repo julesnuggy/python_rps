@@ -10,14 +10,25 @@ cp = ColourfulPrint()
 
 def start_game():
     game = Game()
+    is_p2_cpu = None
 
     cp.print_game_text('      ROCK! PAPER! SCISSORS!      ')
 
+    while not (is_p2_cpu in {True, False}):
+        print('Are 1 or 2 humans playing?')
+        user_input = input()
+        if (user_input == '1'):
+            is_p2_cpu = True
+        elif(user_input == '2'):
+            is_p2_cpu = False
+        else:
+            is_p2_cpu = None
+
     print('Player 1, what is your name?')
-    p1 = Player(str(input()))
+    p1 = Player(str(input()), False)
 
     print('Player 2, what is your name?')
-    p2 = Player(str(input()))
+    p2 = Player(str(input()), is_p2_cpu)
 
     print('')
     print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("VS")} {cp.format_p2_name(p2.name)}')
