@@ -1,9 +1,11 @@
 from Enums import MoveEnum, ResultEnum
+from rps.utils.ConsoleInputHelper import print_game_end_results
 from utils.ColourfulPrint import ColourfulPrint
 
 
 class Game:
     is_game_running = True
+    round = 1
     p1_move = ''
     p2_move = ''
     result = ResultEnum.NONE
@@ -11,6 +13,9 @@ class Game:
 
     def end_game(self):
         self.is_game_running = False
+
+    def increment_round(self):
+        self.round += 1
 
     def set_p1_move(self, move):
         if not(self.is_valid_input(move)):
@@ -37,7 +42,7 @@ class Game:
         elif move == MoveEnum.SCISSORS:
             return self.cp.format_move_scissors(MoveEnum.SCISSORS.name)
 
-    def get_game_result(self):
+    def calculate_round_result(self):
         if self.p1_move == self.p2_move:
             self.set_result(ResultEnum.DRAW)
             return
@@ -67,6 +72,11 @@ class Game:
         self.p1_move = ''
         self.p2_move = ''
         self.result = ResultEnum.NONE
+
+    def handle_game_end(self, p1, p2):
+        print_game_end_results(p1, p2)
+        self.end_game()
+        exit()
 
     @staticmethod
     def is_valid_input(user_input):

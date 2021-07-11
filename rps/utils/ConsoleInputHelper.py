@@ -27,3 +27,16 @@ def print_scoreboard(p1: Player, p2: Player):
     print('-' * len(score_text))
     print(score_text)
     print('-' * len(score_text))
+
+
+def print_game_end_results(p1: Player, p2: Player):
+    print('')
+    cp.print_game_text('            GAME OVER!            ')
+    print_scoreboard(p1, p2)
+    print('')
+    if p1.score > p2.score:
+        cp.print_p1_wins(f'{p1.name} wins!')
+    elif p2.score > p1.score:
+        cp.print_p2_wins(f'{p2.name} wins!')
+    else:
+        cp.print_draw('It\'s a draw!')

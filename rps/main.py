@@ -1,3 +1,5 @@
+import sys
+import time
 from random import randint
 
 from Player import Player
@@ -37,11 +39,13 @@ def start_game():
         p2 = Player(str(input()), False, False)
 
     print('')
-    print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("VS")} {cp.format_p2_name(p2.name)}')
-    cp.print_game_text('              FIGHT!              ')
     game.print_instructions()
+    print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("VS")} {cp.format_p2_name(p2.name)}')
 
     while game.is_game_running:
+        print('')
+        cp.print_game_text(f'               ROUND {game.round} --- FIGHT!               ')
+        print('')
 
         while not (game.is_valid_move(game.p1_move)):
             p1_input = get_hidden_user_input(p1)
@@ -51,10 +55,7 @@ def start_game():
             elif p1_input.lower().strip() == 's':
                 print_scoreboard(p1, p2)
             elif p1_input.lower().strip() == 'q':
-                print('')
-                cp.print_game_text('            GAME OVER!            ')
-                print_scoreboard(p1, p2)
-                game.end_game()
+                game.handle_game_end(p1, p2)
             else:
                 game.set_p1_move(p1_input)
 
@@ -69,7 +70,7 @@ def start_game():
         print('')
         print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("played")} {game.get_move_formatting(game.p1_move)}')
         print(f'{cp.format_p2_name(p2.name)} {cp.format_standard_text("played")} {game.get_move_formatting(game.p2_move)}')
-        game.get_game_result()
+        game.calculate_round_result()
 
         if game.result == ResultEnum.DRAW:
             cp.print_draw('It\'s a draw!')
@@ -80,7 +81,14 @@ def start_game():
             p2.add_to_score()
             cp.print_p2_wins(f'{p2.name} wins!')
 
+        game.increment_round()
         game.reset_result_state()
+
+        sys.stdout.write('Next round starting in: ')
+        for i in range(3, 0, -1):
+            sys.stdout.write(str(i) + '... ')
+            sys.stdout.flush()
+            time.sleep(1)
 
 
 def game_next_steps(p1, p2, game):

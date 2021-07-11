@@ -65,7 +65,7 @@ class GameTestCase(unittest.TestCase):
         self.game.set_p1_move('1')
         self.game.set_p2_move('2')
         # When
-        self.game.get_game_result()
+        self.game.calculate_round_result()
         # Then
         self.assertEqual(self.game.result, ResultEnum.P2)
 
