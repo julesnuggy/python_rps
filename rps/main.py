@@ -1,6 +1,8 @@
+from random import randint
+
 from Player import Player
 from Game import Game
-from Enums import ResultEnum
+from Enums import MoveEnum, ResultEnum
 from utils.ColourfulPrint import ColourfulPrint
 from utils.ConsoleInputHelper import get_hidden_user_input, print_scoreboard
 
@@ -27,8 +29,12 @@ def start_game():
     print('Player 1, what is your name?')
     p1 = Player(str(input()), False)
 
-    print('Player 2, what is your name?')
-    p2 = Player(str(input()), is_p2_cpu)
+    if (is_p2_cpu):
+        print('Player 2, JANKENPON, has entered the arena')
+        p2 = Player('JANKENPON', True)
+    else:
+        print('Player 2, what is your name?')
+        p2 = Player(str(input()), False)
 
     print('')
     print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("VS")} {cp.format_p2_name(p2.name)}')
@@ -41,9 +47,13 @@ def start_game():
             p1_input = get_hidden_user_input(p1.name)
             game.set_p1_move(p1_input)
 
-        while not (game.is_valid_move(game.p2_move)):
-            p2_input = get_hidden_user_input(p2.name)
-            game.set_p2_move(p2_input)
+        if (p2.is_cpu_player):
+            game.set_p2_move(str(randint(1, 3)))
+            print(f'{p2.name} has made their move!')
+        else:
+            while not (game.is_valid_move(game.p2_move)):
+                p2_input = get_hidden_user_input(p2.name)
+                game.set_p2_move(p2_input)
 
         print('')
         print(f'{cp.format_p1_name(p1.name)} {cp.format_standard_text("played")} {game.get_move_formatting(game.p1_move)}')
