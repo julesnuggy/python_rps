@@ -45,15 +45,17 @@ keyboard)!
 |   2   | PAPER    |
 |   3   | SCISSORS |
 
-Player 1 goes first. Once both players have entered their moves, the game will automatically work out who the winner is.
+Player 1 goes first. Once both players have entered their moves, the game will automatically work out who the winner is 
+for each round and for the game as a whole when you quit. After each round, a 3 second countdown will commence to announce 
+the next round.
 
-At the end of each match, you will have 3 options available to you:
+At any point where you can input to the console, you have 3 options available to you:
 
-| Input | Option                |
-|:-----:|:----------------------|
-|   s   | View the scoreboard   |
-|   p   | Play another match    |
-|   q   | Quit the game         |
+| Input | Option              |
+|:-----:|:--------------------|
+|   i   | View instructions   |
+|   s   | View scoreboard     |
+|   q   | Quit the game       |
 
 ## FAQ
 1) **Why is the output displaying weirdly in my Git Bash, with lots of random strings at the beginning?**
